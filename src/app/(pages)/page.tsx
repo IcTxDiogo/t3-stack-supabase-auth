@@ -1,4 +1,4 @@
-import {ThemeModeToggle} from "@/components/toggles/themeModeToggle";
+import { ThemeModeToggle } from "@/components/toggles/themeModeToggle";
 
 export default async function Home() {
   return (

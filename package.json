@@ -11,6 +11,7 @@
     "postinstall": "prisma generate",
     "lint": "next lint",
     "start": "next start",
+    "prettier": "prettier --write ./src",
     "ui": "pnpm dlx shadcn-ui@latest add "
   },
   "dependencies": {
