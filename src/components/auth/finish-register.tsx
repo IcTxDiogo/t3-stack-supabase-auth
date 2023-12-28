@@ -22,7 +22,7 @@ const formSchema = z.object({
 });
 
 type FinishRegisterProps = {
-  id: string;
+  id?: string;
 };
 
 export default function FinishRegister({ id }: FinishRegisterProps) {

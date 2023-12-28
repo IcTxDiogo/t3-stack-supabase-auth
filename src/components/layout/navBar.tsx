@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import type { Database } from "@/lib/database.types";
+import { getLoggedUserData, getProfile, verifySession } from "@/utils/auth";
 
 export type MenuItem = {
   id: string;
@@ -23,15 +24,12 @@ type NavBarProps = {
 };
 
 export default async function NavBar({ leftItem, items, isHome }: NavBarProps) {
-  const cookie = cookies();
-  const supabase = createServerComponentClient<Database>({
-    cookies: () => cookie,
-  });
-  const { data } = await supabase.from("profiles").select("*");
+  const { isAuthenticated, profile } = await getLoggedUserData();
+
   return (
     <nav
       className={
-        "sticky top-0 flex h-[7vh] items-center justify-between border-b border-b-foreground bg-background px-8"
+        "sticky top-0 flex h-[10vh] items-center justify-between border-b border-b-foreground bg-background px-8"
       }
     >
       <div className={"flex items-center gap-2"}>
@@ -48,9 +46,9 @@ export default async function NavBar({ leftItem, items, isHome }: NavBarProps) {
         <NavBarGenerateMenu items={items} />
         <Separator orientation={"vertical"} className={"h-[40px]"} />
         <ThemeModeToggle />
-        {data ? (
+        {isAuthenticated ? (
           <>
-            Hi {data[0]?.full_name}
+            Hi {profile?.full_name}
             <form action={"auth/logout"} method={"post"}>
               <Button type={"submit"} variant={"outline"} size={"icon"}>
                 <LogOut />

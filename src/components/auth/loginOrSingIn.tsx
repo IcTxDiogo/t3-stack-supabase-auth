@@ -26,11 +26,7 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
   const supabase = createClientComponentClient<Database>();
   const searchParams = useSearchParams();
 
-  const hasConfirmCode = searchParams.get("code");
-  let singInRedirect = "";
-  if (hasConfirmCode) {
-    singInRedirect += "finish-register";
-  }
+  const hasConfirmEmailCode = searchParams.get("code");
 
   async function handleSubmit() {
     if (page === "login") {
@@ -56,7 +52,11 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
       email,
       password,
     });
-    router.push(`/${singInRedirect}`);
+    if (hasConfirmEmailCode) {
+      router.push("/finish-register");
+    } else {
+      router.refresh();
+    }
   }
 
   const isLogin = page === "login";

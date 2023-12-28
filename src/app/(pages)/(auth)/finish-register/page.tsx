@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 import {
@@ -7,21 +6,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import FinishRegister from "@/components/auth/finish-register";
-import type { Database } from "@/lib/database.types";
+import { getLoggedUserData } from "@/utils/auth";
 
 export default async function Page() {
-  const cookie = cookies();
-  const supabase = createServerComponentClient<Database>({
-    cookies: () => cookie,
-  });
-  const { data } = await supabase.from("profiles").select("*");
-  const fullName = data?.[0]?.full_name;
-  const id = data?.[0]?.id;
-  if (fullName ?? !id) {
+  const { profile } = await getLoggedUserData();
+  if (!(profile?.full_name === null)) {
     redirect("/");
   }
+
+  const id = profile?.id;
   return (
     <>
       <main className={"flex min-h-screen items-center justify-center"}>

@@ -2,9 +2,15 @@ import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
 
 export const profilesRouter = createTRPCRouter({
-  hello: publicProcedure.query(({ ctx }) => {
-    return ctx.db.profiles.findMany();
-  }),
+  getProfile: publicProcedure
+    .input(z.object({ id: z.string().uuid() }))
+    .query(({ ctx, input }) => {
+      return ctx.db.profiles.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+    }),
   update: publicProcedure
     .input(
       z.object({

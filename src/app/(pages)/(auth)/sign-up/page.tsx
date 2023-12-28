@@ -5,8 +5,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import LoginOrSingIn from "@/components/auth/loginOrSingIn";
+import { verifySession } from "@/utils/auth";
+import { redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+  const isAuthenticated = await verifySession();
+  if (isAuthenticated) {
+    redirect("/");
+  }
   return (
     <>
       <main className={"flex min-h-screen items-center justify-center"}>
