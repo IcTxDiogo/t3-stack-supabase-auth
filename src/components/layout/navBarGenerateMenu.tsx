@@ -3,7 +3,6 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-import { type MenuItem } from "@/components/layout/navBar";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -11,6 +10,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { type MenuItem } from "@/components/layout/navBar";
 
 type NavBarGenerateMenuProps = {
   items: MenuItem[];

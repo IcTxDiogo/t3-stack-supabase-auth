@@ -8,8 +8,8 @@ import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
 export const metadata = {
-  title: "My Closet",
-  description: "Your closet, in the cloud.",
+  title: "T3-stack with supabase Auth",
+  description: "A boilerplate for T3-stack with Supabase Auth",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 

@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 import {
   Card,
   CardDescription,
@@ -6,7 +8,6 @@ import {
 } from "@/components/ui/card";
 import LoginOrSingIn from "@/components/auth/loginOrSingIn";
 import { verifySession } from "@/utils/auth";
-import { redirect } from "next/navigation";
 
 export default async function Page() {
   const isAuthenticated = await verifySession();
@@ -20,7 +21,7 @@ export default async function Page() {
           <CardHeader>
             <CardTitle>Sign Up</CardTitle>
             <CardDescription>
-              Create an account to save your favorite clothes
+              Create an account to test the authentication
             </CardDescription>
           </CardHeader>
           <LoginOrSingIn page={"signUp"} />

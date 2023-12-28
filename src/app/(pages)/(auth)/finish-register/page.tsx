@@ -21,7 +21,7 @@ export default async function Page() {
       <main className={"flex min-h-screen items-center justify-center"}>
         <Card className={"m-2 w-full max-w-[400px]"}>
           <CardHeader>
-            <CardTitle>Finish register </CardTitle>
+            <CardTitle>Finish register</CardTitle>
             <CardDescription>
               Please fill in the form below to complete your registration.
             </CardDescription>

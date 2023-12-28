@@ -3,15 +3,19 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import Link from "next/link";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import DialogAlert from "@/components/dialogs/dialogAlert";
 import type { Database } from "@/lib/database.types";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ArrowLeft } from "lucide-react";
-import DialogAlert from "@/components/auth/dialogAlert";
+import FormItemRender from "@/components/form/formItemRender";
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type LoginOrSingInProps = {
   page: "login" | "signUp";
@@ -30,9 +34,19 @@ const dialogDataWrongCredentials = {
   redirect: false,
 };
 
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+
 export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
   const [isOpen, setIsOpen] = useState(false);
   const [dialogData, setDialogData] = useState({
     title: "",
@@ -46,18 +60,18 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
 
   const hasConfirmEmailCode = searchParams.get("code");
 
-  async function handleSubmit() {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     if (page === "login") {
-      await handleSignIn();
+      await handleSignIn(values);
     } else {
-      await handleSignUp();
+      await handleSignUp(values);
     }
   }
 
-  async function handleSignUp() {
+  async function handleSignUp(values: z.infer<typeof formSchema>) {
     await supabase.auth.signUp({
-      email,
-      password,
+      email: values.email,
+      password: values.password,
       options: {
         emailRedirectTo: `${location.origin}/login`,
       },
@@ -66,10 +80,10 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
     setIsOpen(true);
   }
 
-  async function handleSignIn() {
+  async function handleSignIn(values: z.infer<typeof formSchema>) {
     const response = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: values.email,
+      password: values.password,
     });
     if (response.error) {
       setDialogData(dialogDataWrongCredentials);
@@ -89,28 +103,25 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
     <>
       <DialogAlert isOpen={isOpen} setIsOpen={setIsOpen} {...dialogData} />
       <CardContent className="space-y-2">
-        <div className="space-y-1">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            placeholder={"my@closet.com"}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="space-y-1">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            type="password"
-            id="password"
-            placeholder={"********"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)}>
+            <FormItemRender
+              form={form}
+              name={"email"}
+              label={"Email"}
+              renderItem={(field) => <Input {...field} />}
+            />
+            <FormItemRender
+              form={form}
+              name={"password"}
+              label={"Password"}
+              renderItem={(field) => <Input type={"password"} {...field} />}
+            />
+          </form>
+        </Form>
       </CardContent>
       <CardFooter className={"flex-col gap-2"}>
-        <Button onClick={handleSubmit} className={"w-[160px]"}>
+        <Button onClick={form.handleSubmit(onSubmit)} className={"w-[160px]"}>
           Submit
         </Button>
         <Link href={isLogin ? "/sign-up" : "/login"}>

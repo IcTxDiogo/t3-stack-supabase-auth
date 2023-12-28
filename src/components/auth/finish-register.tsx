@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import FormItemRender from "@/components/form/formItemRender";
-import DialogAlert from "@/components/auth/dialogAlert";
+import DialogAlert from "@/components/dialogs/dialogAlert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form } from "@/components/ui/form";
@@ -52,6 +52,7 @@ export default function FinishRegister({ id }: FinishRegisterProps) {
         setIsOpen={setIsOpen}
         title={"register success"}
         description={"Now you are ready to your cloud closet"}
+        redirect={true}
       />
       <CardContent className="space-y-2">
         <Form {...form}>

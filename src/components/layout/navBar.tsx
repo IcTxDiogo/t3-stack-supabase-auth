@@ -5,11 +5,8 @@ import Link from "next/link";
 import NavBarGenerateMenu from "@/components/layout/navBarGenerateMenu";
 import { ThemeModeToggle } from "@/components/toggles/themeModeToggle";
 import { Separator } from "@/components/ui/separator";
+import { getLoggedUserData } from "@/utils/auth";
 import { Button } from "@/components/ui/button";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import type { Database } from "@/lib/database.types";
-import { getLoggedUserData, getProfile, verifySession } from "@/utils/auth";
 
 export type MenuItem = {
   id: string;
