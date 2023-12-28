@@ -27,10 +27,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
-        )}
+        className={cn("bg-background font-sans antialiased", fontSans.variable)}
       >
         <TRPCReactProvider cookies={cookies().toString()}>
           <ThemeModeProvider

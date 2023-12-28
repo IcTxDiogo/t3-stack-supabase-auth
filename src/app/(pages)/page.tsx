@@ -13,12 +13,14 @@ export default async function Home() {
   return (
     <>
       <NavBar isHome leftItem={"My closet"} items={menuItem} />
-      <main className={"flex min-h-screen items-center justify-center"}>
+      <main className={"flex min-h-[90vh] items-center justify-center"}>
         <div
           className={
             "container flex flex-col items-center justify-center gap-12 px-4 py-16"
           }
-        ></div>
+        >
+          a
+        </div>
       </main>
     </>
   );
