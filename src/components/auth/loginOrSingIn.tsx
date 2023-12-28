@@ -1,7 +1,7 @@
 "use client";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import type { Database } from "@/lib/database.types";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import DialogAlert from "@/components/auth/dialogAlert";
 
 type LoginOrSingInProps = {
   page: "login" | "signUp";
@@ -19,8 +20,17 @@ type LoginOrSingInProps = {
 export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
+  const searchParams = useSearchParams();
+
+  const hasConfirmCode = searchParams.get("code");
+  let singInRedirect = "";
+  if (hasConfirmCode) {
+    singInRedirect += "finish-register";
+  }
 
   async function handleSubmit() {
     if (page === "login") {
@@ -35,10 +45,10 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
       email,
       password,
       options: {
-        emailRedirectTo: `${location.origin}/complete-register`,
+        emailRedirectTo: `${location.origin}/login`,
       },
     });
-    router.push("/");
+    setIsOpen(true);
   }
 
   async function handleSignIn() {
@@ -46,13 +56,21 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
       email,
       password,
     });
-    router.push("/");
+    router.push(`/${singInRedirect}`);
   }
 
   const isLogin = page === "login";
 
   return (
     <>
+      <DialogAlert
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title={"Email confirmation need"}
+        description={
+          "A confirmation email has been sent to your email address. Please click on the confirmation link in the email to activate your account."
+        }
+      />
       <CardContent className="space-y-2">
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>

@@ -22,7 +22,7 @@ const fontSans = FontSans({
   variable: "--font-sans",
 });
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
