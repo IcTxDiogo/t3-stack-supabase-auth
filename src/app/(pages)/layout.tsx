@@ -4,8 +4,8 @@ import { type ReactNode } from "react";
 
 import { ThemeModeProvider } from "@/components/providers/themeModeProvider";
 import { TRPCReactProvider } from "@/trpc/react";
-import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
+import "@/styles/globals.css";
 
 export const metadata = {
   title: "My Closet",
@@ -26,6 +26,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
+        suppressHydrationWarning
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable,
