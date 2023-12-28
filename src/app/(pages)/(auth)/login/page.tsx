@@ -1,4 +1,4 @@
-import Login from "@/components/auth/login";
+import LoginOrSingIn from "@/components/auth/loginOrSingIn";
 import {
   Card,
   CardDescription,
@@ -10,14 +10,14 @@ export default function Page() {
   return (
     <>
       <main className={"flex min-h-screen items-center justify-center"}>
-        <Card className={"m-4 w-full max-w-[400px]"}>
+        <Card className={"m-2 w-full max-w-[400px]"}>
           <CardHeader>
             <CardTitle>Login</CardTitle>
             <CardDescription>
-              login to your account to access your virtual closet
+              Login to your account to access your virtual closet
             </CardDescription>
           </CardHeader>
-          <Login />
+          <LoginOrSingIn page={"login"} />
         </Card>
       </main>
     </>
