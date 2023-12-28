@@ -17,10 +17,28 @@ type LoginOrSingInProps = {
   page: "login" | "signUp";
 };
 
+const dialogDataEmailConfirmation = {
+  title: "Email confirmation need",
+  description:
+    "A confirmation email has been sent to your email address. Please click on the confirmation link in the email to activate your account.",
+  redirect: true,
+};
+
+const dialogDataWrongCredentials = {
+  title: "Wrong credentials",
+  description: "Please check your email and password and try again or sign up.",
+  redirect: false,
+};
+
 export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [dialogData, setDialogData] = useState({
+    title: "",
+    description: "",
+    redirect: true,
+  });
 
   const router = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -44,18 +62,24 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
         emailRedirectTo: `${location.origin}/login`,
       },
     });
+    setDialogData(dialogDataEmailConfirmation);
     setIsOpen(true);
   }
 
   async function handleSignIn() {
-    await supabase.auth.signInWithPassword({
+    const response = await supabase.auth.signInWithPassword({
       email,
       password,
     });
-    if (hasConfirmEmailCode) {
-      router.push("/finish-register");
+    if (response.error) {
+      setDialogData(dialogDataWrongCredentials);
+      setIsOpen(true);
     } else {
-      router.refresh();
+      if (hasConfirmEmailCode) {
+        router.push("/finish-register");
+      } else {
+        router.refresh();
+      }
     }
   }
 
@@ -63,14 +87,7 @@ export default function LoginOrSingIn({ page }: LoginOrSingInProps) {
 
   return (
     <>
-      <DialogAlert
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        title={"Email confirmation need"}
-        description={
-          "A confirmation email has been sent to your email address. Please click on the confirmation link in the email to activate your account."
-        }
-      />
+      <DialogAlert isOpen={isOpen} setIsOpen={setIsOpen} {...dialogData} />
       <CardContent className="space-y-2">
         <div className="space-y-1">
           <Label htmlFor="email">Email</Label>

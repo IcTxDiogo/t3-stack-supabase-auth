@@ -16,20 +16,18 @@ type SingInDialogProps = {
   setIsOpen: (isOpen: boolean) => void;
   title: ReactNode;
   description: ReactNode;
-  href?: string;
+  redirect: boolean;
 };
 export default function DialogAlert({
   isOpen,
   setIsOpen,
   title,
   description,
-  href,
+  redirect,
 }: SingInDialogProps) {
   const router = useRouter();
   function goToHome() {
-    if (href) {
-      router.push(`/${href}`);
-    } else {
+    if (redirect) {
       router.push("/");
     }
   }
