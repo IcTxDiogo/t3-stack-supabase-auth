@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft } from "lucide-react";
+import { Home } from "lucide-react";
 import { type z } from "zod";
 import Link from "next/link";
 
@@ -29,7 +29,7 @@ const areadySignedUpDialogData = {
   url: "/login",
 };
 
-const tooManyRequestsDialogData = {
+export const tooManyRequestsDialogData = {
   title: "Too many requests",
   description:
     "You have reached the limit of requests. Please try again later.",
@@ -77,7 +77,7 @@ export default function SingUp() {
         </Link>
         <Link href={"/"}>
           <Button variant="ghost" className={"w-auth-button"}>
-            <ArrowLeft />
+            <Home />
           </Button>
         </Link>
       </CardFooter>

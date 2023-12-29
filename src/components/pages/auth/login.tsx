@@ -2,7 +2,7 @@
 
 import DialogAlert from "@/components/base/dialogs/dialogAlert";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { Home } from "lucide-react";
 import { useState } from "react";
 import { type z } from "zod";
 import Link from "next/link";
@@ -55,9 +55,14 @@ export default function Login() {
             Sign up
           </Button>
         </Link>
+        <Link href={"/reset-password"}>
+          <Button variant="ghost" className={"w-auth-button"}>
+            Forgot password
+          </Button>
+        </Link>
         <Link href={"/"}>
           <Button variant="ghost" className={"w-auth-button"}>
-            <ArrowLeft />
+            <Home />
           </Button>
         </Link>
       </CardFooter>
