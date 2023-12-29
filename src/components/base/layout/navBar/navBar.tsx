@@ -2,7 +2,7 @@ import { ArrowLeft, LogIn, LogOut } from "lucide-react";
 import { type ReactNode } from "react";
 import Link from "next/link";
 
-import NavBarGenerateMenu from "@/components/base/layout/navBarGenerateMenu";
+import NavBarGenerateMenu from "@/components/base/layout/navBar/navBarGenerateMenu";
 import { ThemeModeToggle } from "@/components/base/toggles/themeModeToggle";
 import { Separator } from "@/components/ui/separator";
 import { getLoggedUserData } from "@/utils/auth";
