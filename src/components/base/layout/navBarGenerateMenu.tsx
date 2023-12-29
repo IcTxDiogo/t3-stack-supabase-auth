@@ -10,7 +10,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { type MenuItem } from "@/components/layout/navBar";
+import { type MenuItem } from "@/components/base/layout/navBar";
 
 type NavBarGenerateMenuProps = {
   items: MenuItem[];

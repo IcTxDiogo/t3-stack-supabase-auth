@@ -1,6 +1,6 @@
 import { randomUUID } from "crypto";
 
-import NavBar, { type MenuItem } from "@/components/layout/navBar";
+import NavBar, { type MenuItem } from "@/components/base/layout/navBar";
 
 const menuItem: MenuItem[] = [
   {

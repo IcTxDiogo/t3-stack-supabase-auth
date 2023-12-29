@@ -7,7 +7,7 @@ import { z } from "zod";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
 import FormItemRender from "@/components/form/formItemRender";
-import DialogAlert from "@/components/dialogs/dialogAlert";
+import DialogAlert from "@/components/base/dialogs/dialogAlert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form } from "@/components/ui/form";

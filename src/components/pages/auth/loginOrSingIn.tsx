@@ -6,7 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { CardContent, CardFooter } from "@/components/ui/card";
-import DialogAlert from "@/components/dialogs/dialogAlert";
+import DialogAlert from "@/components/base/dialogs/dialogAlert";
 import type { Database } from "@/lib/database.types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
