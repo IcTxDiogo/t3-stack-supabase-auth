@@ -11,24 +11,30 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-type SingInDialogProps = {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+export type BodyDialogAlert = {
   title: ReactNode;
   description: ReactNode;
   redirect: boolean;
+  url?: string;
 };
+
+type DialogAlertProps = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+} & BodyDialogAlert;
 export default function DialogAlert({
   isOpen,
   setIsOpen,
   title,
   description,
   redirect,
-}: SingInDialogProps) {
+  url,
+}: DialogAlertProps) {
   const router = useRouter();
   function goToHome() {
     if (redirect) {
-      router.push("/");
+      const href = url ? url : "/";
+      router.push(href);
     }
   }
   return (
