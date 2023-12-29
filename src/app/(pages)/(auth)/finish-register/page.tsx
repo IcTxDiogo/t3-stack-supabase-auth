@@ -19,7 +19,7 @@ export default async function Page() {
   return (
     <>
       <main className={"flex min-h-screen items-center justify-center"}>
-        <Card className={"m-2 w-full max-w-[400px]"}>
+        <Card className={"max-w-auth-card m-2 w-full"}>
           <CardHeader>
             <CardTitle>Finish register</CardTitle>
             <CardDescription>
