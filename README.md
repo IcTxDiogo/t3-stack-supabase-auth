@@ -27,7 +27,7 @@ add column birthdate timestamp with time zone,
 add column phone text;
 ```
 
-After that you need to get the `DATABASE_URL`, `SUPABASE_URL` and `SUPABASE_KEY` from supabase and add them to `.env.local` file
+After that you need to get the `DATABASE_URL`, `SUPABASE_URL` and `SUPABASE_KEY` from supabase, create a `.env` and add them to file
 
 `DATABASE_URL` is in project settings > Database > Connection Settings > URI
 
