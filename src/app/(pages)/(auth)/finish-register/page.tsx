@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import FinishRegister from "@/components/auth/finish-register";
+import FinishRegister from "@/components/pages/auth/finish-register";
 import { getLoggedUserData } from "@/utils/auth";
 
 export default async function Page() {

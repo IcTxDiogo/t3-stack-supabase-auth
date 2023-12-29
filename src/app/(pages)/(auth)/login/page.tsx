@@ -6,7 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginOrSingIn from "@/components/auth/loginOrSingIn";
+import LoginOrSingIn from "@/components/pages/auth/loginOrSingIn";
 import { verifySession } from "@/utils/auth";
 
 export default async function Page() {
