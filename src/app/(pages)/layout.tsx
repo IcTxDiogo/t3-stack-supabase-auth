@@ -2,7 +2,7 @@ import { Inter as FontSans } from "next/font/google";
 import { cookies } from "next/headers";
 import { type ReactNode } from "react";
 
-import { ThemeModeProvider } from "@/components/providers/themeModeProvider";
+import { ThemeModeProvider } from "@/components/base/providers/themeModeProvider";
 import { TRPCReactProvider } from "@/trpc/react";
 import { cn } from "@/lib/utils";
 import "@/styles/globals.css";

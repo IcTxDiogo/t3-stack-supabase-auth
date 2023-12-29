@@ -1,12 +1,13 @@
-import { ArrowLeft, LogIn, LogOut } from "lucide-react";
-import { type ReactNode } from "react";
+import { ArrowLeft } from "lucide-react";
+import { type ReactNode, Suspense } from "react";
 import Link from "next/link";
 
-import NavBarGenerateMenu from "@/components/layout/navBarGenerateMenu";
-import { ThemeModeToggle } from "@/components/toggles/themeModeToggle";
+import NavBarGenerateMenu from "@/components/base/layout/navBar/navBarGenerateMenu";
+import { ThemeModeToggle } from "@/components/base/toggles/themeModeToggle";
 import { Separator } from "@/components/ui/separator";
-import { getLoggedUserData } from "@/utils/auth";
 import { Button } from "@/components/ui/button";
+import Profile from "@/components/base/layout/navBar/profile";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export type MenuItem = {
   id: string;
@@ -20,9 +21,7 @@ type NavBarProps = {
   isHome?: boolean;
 };
 
-export default async function NavBar({ leftItem, items, isHome }: NavBarProps) {
-  const { isAuthenticated, profile } = await getLoggedUserData();
-
+export default function NavBar({ leftItem, items, isHome }: NavBarProps) {
   return (
     <nav
       className={
@@ -43,22 +42,9 @@ export default async function NavBar({ leftItem, items, isHome }: NavBarProps) {
         <NavBarGenerateMenu items={items} />
         <Separator orientation={"vertical"} className={"h-[40px]"} />
         <ThemeModeToggle />
-        {isAuthenticated ? (
-          <>
-            Hi {profile?.full_name}
-            <form action={"auth/logout"} method={"post"}>
-              <Button type={"submit"} variant={"outline"} size={"icon"}>
-                <LogOut />
-              </Button>
-            </form>
-          </>
-        ) : (
-          <Link href={"/login"}>
-            <Button variant={"ghost"} size={"icon"}>
-              <LogIn />
-            </Button>
-          </Link>
-        )}
+        <Suspense fallback={<Skeleton className={"h-[40px] w-[40px]"} />}>
+          <Profile />
+        </Suspense>
       </div>
     </nav>
   );

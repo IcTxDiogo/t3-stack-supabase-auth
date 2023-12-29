@@ -1,13 +1,12 @@
-import { redirect } from "next/navigation";
-
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import UpdatePassword from "@/components/pages/auth/updatePassword";
 import { verifySession } from "@/utils/auth";
-import Login from "@/components/pages/auth/login";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
   const isAuthenticated = await verifySession();
@@ -19,10 +18,10 @@ export default async function Page() {
       <main className={"flex min-h-screen items-center justify-center"}>
         <Card className={"max-w-auth-card m-2 w-full"}>
           <CardHeader>
-            <CardTitle>Login</CardTitle>
-            <CardDescription>Login to test the authentication</CardDescription>
+            <CardTitle>Reset Password</CardTitle>
+            <CardDescription>Type your new password</CardDescription>
           </CardHeader>
-          <Login />
+          <UpdatePassword />
         </Card>
       </main>
     </>

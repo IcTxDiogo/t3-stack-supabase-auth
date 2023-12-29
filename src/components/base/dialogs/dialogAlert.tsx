@@ -1,5 +1,5 @@
+import type { MouseEvent, ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { type ReactNode } from "react";
 
 import {
   AlertDialog,
@@ -11,24 +11,32 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-type SingInDialogProps = {
-  isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+export type BodyDialogAlert = {
   title: ReactNode;
   description: ReactNode;
   redirect: boolean;
+  url?: string;
 };
+
+type DialogAlertProps = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+} & BodyDialogAlert;
 export default function DialogAlert({
   isOpen,
   setIsOpen,
   title,
   description,
   redirect,
-}: SingInDialogProps) {
+  url,
+}: DialogAlertProps) {
   const router = useRouter();
-  function goToHome() {
+  function goToHome(e: MouseEvent) {
     if (redirect) {
-      router.push("/");
+      e.preventDefault();
+      const href = url ? url : "/";
+      console.log(href);
+      router.push(href);
     }
   }
   return (
@@ -40,7 +48,9 @@ export default function DialogAlert({
             <AlertDialogDescription>{description}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={goToHome}>Dismiss</AlertDialogAction>
+            <AlertDialogAction onClick={(e) => goToHome(e)}>
+              Dismiss
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
