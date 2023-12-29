@@ -1,5 +1,5 @@
+import type { MouseEvent, ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { type ReactNode } from "react";
 
 import {
   AlertDialog,
@@ -31,9 +31,11 @@ export default function DialogAlert({
   url,
 }: DialogAlertProps) {
   const router = useRouter();
-  function goToHome() {
+  function goToHome(e: MouseEvent) {
     if (redirect) {
+      e.preventDefault();
       const href = url ? url : "/";
+      console.log(href);
       router.push(href);
     }
   }
@@ -46,7 +48,9 @@ export default function DialogAlert({
             <AlertDialogDescription>{description}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogAction onClick={goToHome}>Dismiss</AlertDialogAction>
+            <AlertDialogAction onClick={(e) => goToHome(e)}>
+              Dismiss
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
