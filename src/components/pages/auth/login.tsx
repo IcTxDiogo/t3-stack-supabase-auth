@@ -58,7 +58,6 @@ export default function Login() {
         <Link href={"/"}>
           <Button variant="ghost" className={"w-auth-button"}>
             <ArrowLeft />
-            Back
           </Button>
         </Link>
       </CardFooter>

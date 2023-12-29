@@ -49,7 +49,6 @@ export default function SingUp() {
         <Link href={"/"}>
           <Button variant="ghost" className={"w-auth-button"}>
             <ArrowLeft />
-            Back
           </Button>
         </Link>
       </CardFooter>
