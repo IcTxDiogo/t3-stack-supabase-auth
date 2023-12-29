@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginOrSingIn from "@/components/pages/auth/loginOrSingIn";
 import { verifySession } from "@/utils/auth";
+import Login from "@/components/pages/auth/login";
 
 export default async function Page() {
   const isAuthenticated = await verifySession();
@@ -22,7 +22,7 @@ export default async function Page() {
             <CardTitle>Login</CardTitle>
             <CardDescription>Login to test the authentication</CardDescription>
           </CardHeader>
-          <LoginOrSingIn page={"login"} />
+          <Login />
         </Card>
       </main>
     </>

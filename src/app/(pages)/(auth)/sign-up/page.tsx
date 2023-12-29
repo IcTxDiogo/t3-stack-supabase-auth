@@ -6,8 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LoginOrSingIn from "@/components/pages/auth/loginOrSingIn";
 import { verifySession } from "@/utils/auth";
+import SingUp from "@/components/pages/auth/singUp";
 
 export default async function Page() {
   const isAuthenticated = await verifySession();
@@ -24,7 +24,7 @@ export default async function Page() {
               Create an account to test the authentication
             </CardDescription>
           </CardHeader>
-          <LoginOrSingIn page={"signUp"} />
+          <SingUp />
         </Card>
       </main>
     </>
