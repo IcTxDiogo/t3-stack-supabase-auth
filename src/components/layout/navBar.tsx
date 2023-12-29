@@ -26,7 +26,7 @@ export default async function NavBar({ leftItem, items, isHome }: NavBarProps) {
   return (
     <nav
       className={
-        "sticky top-0 flex h-[10vh] items-center justify-between border-b border-b-foreground bg-background px-8"
+        "sticky top-0 flex h-[60px] items-center justify-between border-b border-b-foreground bg-background px-8"
       }
     >
       <div className={"flex items-center gap-2"}>
